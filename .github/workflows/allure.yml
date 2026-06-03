@@ -1,0 +1,33 @@
+name: Allure TestOps Demo
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:        # позволяет запускать вручную — удобно на демо
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run tests
+        run: pytest tests/ -v
+
+      - name: Upload results to Allure TestOps
+        uses: allure-framework/allure-pytest-action@v1
+        with:
+          allure-endpoint: https://allure.testops.cloud
+          allure-token: ${{ secrets.ALLURE_TOKEN }}
+          allure-project-id: ${{ secrets.ALLURE_PROJECT_ID }}
+          allure-results: allure-results
