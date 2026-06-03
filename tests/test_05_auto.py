@@ -3,7 +3,7 @@ import requests
 
 BASE_URL = "https://jsonplaceholder.typicode.com"
 
-@allure.id("6114")          # ← ID твоего тест-кейса из ТестОпс
+@allure.id("6115")          # ← ID твоего тест-кейса из ТестОпс
 @allure.title("GET /posts/1 — успешное получение поста")
 @allure.feature("API — Посты")
 @allure.story("Получение поста")
